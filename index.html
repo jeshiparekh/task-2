@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A modern and responsive To-Do List Web Application">
+    <title>Modern To-Do List Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <i class="fas fa-tasks"></i>
+                    <h1>My Tasks</h1>
+                </div>
+                <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="taskInput" 
+                        class="task-input" 
+                        placeholder="Add a new task..."
+                        autocomplete="off"
+                    >
+                    <button class="add-btn" id="addBtn">
+                        <i class="fas fa-plus"></i> Add Task
+                    </button>
+                </div>
+                <div class="error-message" id="errorMessage"></div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon total">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <div class="stat-info">
+                        <p class="stat-label">Total Tasks</p>
+                        <p class="stat-value" id="totalTasks">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-hourglass-half"></i>
+                    </div>
+                    <div class="stat-info">
+                        <p class="stat-label">Pending</p>
+                        <p class="stat-value" id="pendingTasks">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon completed">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <p class="stat-label">Completed</p>
+                        <p class="stat-value" id="completedTasks">0</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filter and Search Section -->
+            <section class="filter-section">
+                <div class="search-wrapper">
+                    <i class="fas fa-search"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        class="search-input" 
+                        placeholder="Search tasks..."
+                        autocomplete="off"
+                    >
+                </div>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">
+                        <i class="fas fa-list-ul"></i> All
+                    </button>
+                    <button class="filter-btn" data-filter="pending">
+                        <i class="fas fa-clock"></i> Pending
+                    </button>
+                    <button class="filter-btn" data-filter="completed">
+                        <i class="fas fa-check"></i> Completed
+                    </button>
+                </div>
+            </section>
+
+            <!-- Tasks Container -->
+            <section class="tasks-section">
+                <!-- Pending Tasks -->
+                <div class="task-group" id="pendingGroup">
+                    <h2 class="group-title">
+                        <i class="fas fa-hourglass-start"></i> Pending Tasks
+                    </h2>
+                    <div class="tasks-list" id="pendingTasksList">
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <p>No pending tasks. Great job!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Completed Tasks -->
+                <div class="task-group" id="completedGroup">
+                    <div class="group-header">
+                        <h2 class="group-title">
+                            <i class="fas fa-check-double"></i> Completed Tasks
+                        </h2>
+                        <button class="clear-btn" id="clearBtn" title="Clear all completed tasks">
+                            <i class="fas fa-trash-alt"></i> Clear All
+                        </button>
+                    </div>
+                    <div class="tasks-list" id="completedTasksList">
+                        <div class="empty-state">
+                            <i class="fas fa-smile"></i>
+                            <p>No completed tasks yet. Start completing tasks!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 Modern To-Do List Application. Built with <i class="fas fa-heart"></i> for productivity.</p>
+        </footer>
+    </div>
+
+    <!-- Modal for Editing Tasks -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Task</h2>
+                <button class="modal-close" id="modalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input 
+                    type="text" 
+                    id="editInput" 
+                    class="edit-input" 
+                    placeholder="Edit your task..."
+                >
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelBtn">Cancel</button>
+                <button class="btn-save" id="saveBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
